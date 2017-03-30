@@ -1,0 +1,16 @@
+digraph JumpTable {
+    compound = true;
+    node [
+        shape = "record"
+        fontname="monospace"
+        fontsize=10
+    ]
+
+    Steer [ label = "{steer}" ]
+    IfThen [ label = "{moveForward()}" ]
+    SteerEnd [ label = "{updatePhysics()\l}"]
+
+    Steer->IfThen [label="w == 1"]
+    IfThen->SteerEnd
+    Steer->SteerEnd [ label="w != 1"]
+}

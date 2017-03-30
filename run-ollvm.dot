@@ -1,0 +1,38 @@
+digraph "CFG for 'run_game' function" {
+	label="CFG for 'run_game' function";
+
+	Node0x226a2e0 [shape=record,label="{%0}"];
+	Node0x226a2e0 -> Node0x226bc20;
+	Node0x226bc20 [shape=record,label="{loopEntry|{<s0>def|<s1>-1508256000|<s2>-2020197219|<s3>2141556067|<s4>-160261190|<s5>-1670715770|<s6>1297977237|<s7>1846520789|<s8>-1908869552|<s9>10794670}}"];
+	Node0x226bc20:s0 -> Node0x226bd80;
+	Node0x226bc20:s1 -> Node0x226bde0;
+	Node0x226bc20:s2 -> Node0x226be90;
+	Node0x226bc20:s3 -> Node0x226bf40;
+	Node0x226bc20:s4 -> Node0x226bff0;
+	Node0x226bc20:s5 -> Node0x226c0a0;
+	Node0x226bc20:s6 -> Node0x226c150;
+	Node0x226bc20:s7 -> Node0x226c200;
+	Node0x226bc20:s8 -> Node0x226c2b0;
+	Node0x226bc20:s9 -> Node0x226c3a0;
+	Node0x226bd80 [shape=record,label="{switchDefault}"];
+	Node0x226bd80 -> Node0x226c700;
+	Node0x226bde0 [shape=record,label="{%3}"];
+	Node0x226bde0 -> Node0x226c700;
+	Node0x226be90 [shape=record,label="{%10}"];
+	Node0x226be90 -> Node0x226c700;
+	Node0x226bf40 [shape=record,label="{%12}"];
+	Node0x226bf40 -> Node0x226c700;
+	Node0x226bff0 [shape=record,label="{%16}"];
+	Node0x226bff0 -> Node0x226c700;
+	Node0x226c0a0 [shape=record,label="{%28}"];
+	Node0x226c0a0 -> Node0x226c700;
+	Node0x226c150 [shape=record,label="{%31}"];
+	Node0x226c150 -> Node0x226c700;
+	Node0x226c200 [shape=record,label="{%44}"];
+	Node0x226c200 -> Node0x226c700;
+	Node0x226c2b0 [shape=record,label="{%51}"];
+	Node0x226c2b0 -> Node0x226c700;
+	Node0x226c3a0 [shape=record,label="{%62}"];
+	Node0x226c700 [shape=record,label="{loopEnd}"];
+	Node0x226c700 -> Node0x226bc20;
+}

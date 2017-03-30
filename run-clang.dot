@@ -1,0 +1,26 @@
+digraph "CFG for 'run_game' function" {
+	label="CFG for 'run_game' function";
+
+	Node0xbd4de0 [shape=record,label="{%0}"];
+	Node0xbd4de0 -> Node0xbd6040;
+	Node0xbd6040 [shape=record,label="{%3|{<s0>T|<s1>F}}"];
+	Node0xbd6040:s0 -> Node0xbd64e0;
+	Node0xbd6040:s1 -> Node0xbd6540;
+	Node0xbd64e0 [shape=record,label="{%9}"];
+	Node0xbd64e0 -> Node0xbd68e0;
+	Node0xbd68e0 [shape=record,label="{%11|{<s0>T|<s1>F}}"];
+	Node0xbd68e0:s0 -> Node0xbd6b20;
+	Node0xbd68e0:s1 -> Node0xbd6b80;
+	Node0xbd6b20 [shape=record,label="{%14}"];
+	Node0xbd6b20 -> Node0xbd6fc0;
+	Node0xbd6fc0 [shape=record,label="{%26}"];
+	Node0xbd6fc0 -> Node0xbd68e0;
+	Node0xbd6b80 [shape=record,label="{%29|{<s0>T|<s1>F}}"];
+	Node0xbd6b80:s0 -> Node0xbd8660;
+	Node0xbd6b80:s1 -> Node0xbd86c0;
+	Node0xbd8660 [shape=record,label="{%41}"];
+	Node0xbd8660 -> Node0xbd86c0;
+	Node0xbd86c0 [shape=record,label="{%48}"];
+	Node0xbd86c0 -> Node0xbd6040;
+	Node0xbd6540 [shape=record,label="{%59}"];
+}
