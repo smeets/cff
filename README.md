@@ -2,7 +2,7 @@
 
 ## idea
 
-Obfuscate control flow by introducing a loop and state machine (moore) which dispatches the basic blocks. This dispatcher is _very_ often implemented as a switch in high-level code. 
+Obfuscate control flow by replacing the function body with a state machine (moore) loop that dispatches the basic blocks. This dispatcher is _very_ often implemented as a switch in high-level code.
 
 Why do it?
 
@@ -107,6 +107,7 @@ The control flow graphs:
  - dummy (bogus) blocks
  - opaque predicates
  - dispatcher obfuscation
+ - sub-level dispatchers
 
 ## tools
 
