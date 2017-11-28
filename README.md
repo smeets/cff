@@ -7,17 +7,44 @@ Obfuscate control flow by introducing a loop and state machine (moore) that bran
 ## obfuscation
 
 ## algorithm
+A flattening transform implementation could, in the spirit of go, look something like this:
+```go
+/* a simple flattening algorithm */
+func Flatten(f: ir.Function)
+    blocks       := f.BasicBlocks()
+    switch_var   := ir.Var(types.Int32)
+    switch_instr := ir.Switch(switch_var)
+    loop_instr   := ir.While(ir.Bool.True)
+    
+    loop_instr.Add(switch_instr)
+    
+    /* map each top level block to its own case label */
+    for i, block := range(blocks) {  
+        /* later on we want to sprinkle some magic on this computation */
+        next_block_id   := i + 1
+        next_block_expr := switch_var.Assign(next_block_id)
+
+        block.Add(next_block_expr)
+        block.Add(switch_instr.Break())
+        switch_instr.Case(i, block)
+    }
+    
+    f.BasicBlocks().Empty()
+    f.Add(switch_var.Decl(0))
+    f.Add(loop_instr)
+}
+```
 
 ### example (code)
 Here is a very simple example (with some sketchy assembly code).
 ```go
-/* original function: no jumps,  */
+/* original function, { ... } to force flattening  */
 func Magic(x: int) int
 {
                           // mov eax, x
-    x = x + 1;            // add eax, 1
-    x = x % 3;            // mod eax, 3
-    x = x * 2;            // mul eax, 2
+    { x = x + 1; }        // add eax, 1
+    { x = x % 3; }        // mod eax, 3
+    { x = x * 2; }        // mul eax, 2
                           // mov ??, eax
     return x;             // ret
 }
