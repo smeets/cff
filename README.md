@@ -95,7 +95,14 @@ The control flow graphs:
 
 ## attacks
 
-## hardening
+## improving
+
+ - scramble case order
+ - split (large) basic blocks
+ - duplicate blocks
+ - dummy blocks
+ - opaque predicates
+ - dispatcher obfuscation
 
 ## tools
 
