@@ -95,10 +95,9 @@ The control flow graphs:
 
 ## attacks
 
- - symbolic evaluation
+ - symbolic execution + analysis of switch var
  - code lifting
- - (static) analysis of switch var
- - rebuild ir -> recompile w/optimization loop
+ - piggyback on the compiler:  loop `asm to ir -> recompile w/optimization -> asm to ir`
 
 ## improving
 
