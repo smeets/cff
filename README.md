@@ -2,9 +2,17 @@
 
 ## idea
 
-Obfuscate control flow by introducing a loop and state machine (moore) that branches to the next basic block.
+Obfuscate control flow by introducing a loop and state machine (moore) which dispatches the basic blocks. This dispatcher is _very_ often implemented as a switch in high-level code. 
+
+Why do it?
 
 ## obfuscation
+
+Security through obscurity?
+
+Buying time?
+
+Track record of obfuscation techniques?
 
 ## algorithm
 A flattening transform implementation could, in the spirit of go, look something like this:
