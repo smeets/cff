@@ -53,8 +53,7 @@ func Magic(x: int) int
     { x = x + 1; }        // add eax, 1
     { x = x % 3; }        // mod eax, 3
     { x = x * 2; }        // mul eax, 2
-                          // mov ??, eax
-    return x;             // ret
+    { return x;  }        // ret
 }
 
 /* transforms into this monstrosity */
@@ -78,7 +77,6 @@ func Magic(x: int) int
             block = 3;    //     mov block, 3
             break;        //     jmp loop_0_switch_0_end
         case 3:           // label loop_0_switch_0_case_3
-                          //     mov ??, eax
             return x;     //     ret
         }
                           // label loop_0_switch_0_end
