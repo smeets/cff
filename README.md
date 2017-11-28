@@ -102,3 +102,8 @@ The control flow graphs:
 ## results
 
 ## summary
+
+
+## links
+
+ - [Obfuscating C++ programs via control flow flattening, T László and A Kiss, 2009](http://ac.inf.elte.hu/Vol_030_2009/003.pdf)
