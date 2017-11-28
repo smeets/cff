@@ -30,7 +30,7 @@ func Flatten(f: ir.Function)
     for i, block := range(blocks) {  
         /* later on we want to sprinkle some magic on this computation */
         next_block_id   := i + 1
-        next_block_expr := switch_var.Assign(next_block_id)
+        next_block_expr := switch_var.Store(next_block_id)
 
         block.Add(next_block_expr)
         block.Add(switch_instr.Break())
@@ -44,7 +44,7 @@ func Flatten(f: ir.Function)
 ```
 
 ### example (code)
-Here is a very simple example (with some sketchy assembly code).
+Here is a very simple example (with some sketchy x86 assembly).
 ```go
 /* original function, { ... } to force flattening  */
 func Magic(x: int) int
@@ -95,12 +95,17 @@ The control flow graphs:
 
 ## attacks
 
+ - symbolic evaluation
+ - code lifting
+ - (static) analysis of switch var
+ - rebuild ir -> recompile w/optimization loop
+
 ## improving
 
  - scramble case order
  - split (large) basic blocks
  - duplicate blocks
- - dummy blocks
+ - dummy (bogus) blocks
  - opaque predicates
  - dispatcher obfuscation
 
