@@ -140,8 +140,9 @@ extremely simplified example on how to reverse the algorithm:
 ```go
 /* unflattens an IR representation of the flattened function */
 func Unflatten(function_blocks ir.BasicBlock[]) ir.Function {
-    passed_vars := ir.FindStackVars(function_blocks, ir.CC.CDECL)
-    original    := ir.Function(passed_vars)
+    /* this depends on calling convention */
+    fn_params := ir.FindParams(function_blocks)
+    original  := ir.Function(fn_params)
   
     prelude    := function_blocks[0]
     dispatcher := prelude.Find(ir.Switch.type)
@@ -166,6 +167,9 @@ func Unflatten(function_blocks ir.BasicBlock[]) ir.Function {
 ### identifying flattened code
 
  - code lifting
+ 
+```go
+func FindFlattenedFunctions(program ir.
 
 ### using clang to optimize modules
 
