@@ -8,16 +8,16 @@ What does this project focus on? How is it implemented? What are known weaknesse
 
 Layout of this document.
 
- - section 1: [what is cff?](idea)
- - section 2: [an intro to obfuscation](obfuscation)
- - section 3: [implementation](algorithm)
- - section 4: [cff +](strengths)
- - section 5: [cff -](weaknesses)
- - section 6: [attacking cff](attacks)
- - section 7: [improving cff](improving)
- - section 8: [available tools](tools)
- - section 10: [summary](summary)
- - section 11: [links](links)
+ - section 1: [what is cff?](#idea)
+ - section 2: [an intro to obfuscation](#obfuscation)
+ - section 3: [implementation](#algorithm)
+ - section 4: [cff +](#strengths)
+ - section 5: [cff -](#weaknesses)
+ - section 6: [attacking cff](#attacks)
+ - section 7: [improving cff](#improving)
+ - section 8: [available tools](#tools)
+ - section 10: [summary](#summary)
+ - section 11: [links](#links)
 
 ## idea
 
