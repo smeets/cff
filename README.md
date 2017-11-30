@@ -49,8 +49,11 @@ func Flatten(f: ir.Function)
         next_block_id   := i + 1
         next_block_expr := switch_var.Store(next_block_id)
 
-        block.Add(next_block_expr)
-        block.Add(switch_instr.Break())
+        /* skip block=next and break if block terminates function */
+        if !block.AllCodePathsReturn() {
+          block.Add(next_block_expr)
+          block.Add(switch_instr.Break())
+        }
         switch_instr.Case(i, block)
     }
     
@@ -126,8 +129,46 @@ The control flow graphs:
  
 ## attacks
 
- - symbolic execution + analysis of switch var
+### symbolic execution
+
+???
+
+
+### reverse engineering the obfuscation algorithm
+
+extremely simplified example on how to reverse the algorithm:
+```go
+/* unflattens an IR representation of the flattened function */
+func Unflatten(function_blocks ir.BasicBlock[]) ir.Function {
+    passed_vars := ir.FindStackVars(function_blocks, ir.CC.CDECL)
+    original    := ir.Function(passed_vars)
+  
+    prelude    := function_blocks[0]
+    dispatcher := prelude.Find(ir.Switch.type)
+    block_var  := dispatcher.Var
+  
+    prelude.Remove(dispatcher)
+    prelude.Remove(block_var)
+    original.Add(prelude)
+  
+    for _, bb := range(function_blocks[1:]) {
+        if !bb.AllCodePathsReturn() {
+            bb.Remove(-2)
+        }
+    
+        original.Add(bb)
+    }
+    
+    return original
+}
+```
+
+### identifying flattened code
+
  - code lifting
+
+### using clang to optimize modules
+
  - piggyback on the compiler:  loop `asm to ir -> recompile w/optimization -> asm to ir`
 
 ## improving
@@ -142,7 +183,21 @@ The control flow graphs:
 
 ## tools
 
+### [OLLVM](https://github.com/obfuscator-llvm/obfuscator/)
+
 ## results
+
+### benchmarks
+
+ - execution time
+ - throughput
+ - latency?
+ - l2 cache miss?
+
+### analysis
+
+ - dispatcher tree breadth
+ - dispatcher tree depth
 
 ## summary
 
