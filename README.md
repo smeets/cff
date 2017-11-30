@@ -1,10 +1,27 @@
 # control flow flattening
 
+## prelude
+
+Why do we obfuscate code? Is it good? Is it bad? Is it reasonable to obfuscate when SGX and ARM TrustZone exists, if so why?
+
+What does this project focus on? How is it implemented? What are known weaknesses/attacks? Possible improvements?
+
+Layout of this document.
+
+ - section 1: [what is cff?](idea)
+ - section 2: [an intro to obfuscation](obfuscation)
+ - section 3: [implementation](algorithm)
+ - section 4: [cff +](strengths)
+ - section 5: [cff -](weaknesses)
+ - section 6: [attacking cff](attacks)
+ - section 7: [improving cff](improving)
+ - section 8: [available tools](tools)
+ - section 10: [summary](summary)
+ - section 11: [links](links)
+
 ## idea
 
 Obfuscate control flow by replacing the function body with a state machine (moore) loop that dispatches the basic blocks. This dispatcher is _very_ often implemented as a switch in high-level code.
-
-Why do it?
 
 ## obfuscation
 
@@ -91,6 +108,22 @@ The control flow graphs:
 ![img 1]()
 ![img 2]()
 
+## strengths
+
+ - with sophisticated dispatcher constructions the obfuscated control flow is _very_ different from the original
+ - possibility to achieve decent protection against dynamic analysis (e.g. using opaque prngs)
+ - simple base idea/algorithm that is easy to extend and improve
+ - obfuscation improves with other obfuscation techniques: inlining, substitution
+
+## weaknesses
+
+ - very poor cache performance by design (lots of branches)
+ - depending on switch impl. and no. of cases it could consume a big chunk of the jump prediction table
+ - almost guaranteed 100% branch mispredict in dispatcher (which also results in _very_ poor cache perf.)
+ - algorithm used to flatten is easy to undo if known (write optimization/deobfuscate pass for each obfuscation step)
+ - cannot _guarantee_ protection against dynamic analysis (branches, memory access) on its own
+ - resulting graph is _obviously_ obfuscated and easy to identify --> code can be lifted/hoisted (depends on inlining/fusing)
+ 
 ## attacks
 
  - symbolic execution + analysis of switch var
