@@ -166,10 +166,9 @@ func Unflatten(function_blocks ir.BasicBlock[]) ir.Function {
 
 ### identifying flattened code
 
- - code lifting
- 
-```go
-func FindFlattenedFunctions(program ir.
+An interesting aspect of code obfuscation is how easily one, with a trained eye, can judge wether the assembly has been obfuscated or not. Some obfuscation techniques can be quite hard to identify, e.g. opaque predicates, dummy blocks and subsitution. Control flow flattening, however, is often very noticable when implemented as the resulting control flow graph has a distinguishable structure.
+
+This weakness leads to attacks such as *code lifting* whereby an attacker treats the obfuscated code as a black box. It is possible to modify the code that calls into the black box, as well as extracting it into their own program. Thus, control flow flattening shouldn't be used in order to obfuscate stateless functions, e.g. AES.
 
 ### using clang to optimize modules
 
