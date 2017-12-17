@@ -2,9 +2,11 @@
 
 ## prelude
 
-Why do we obfuscate code? Is it good? Is it bad? Is it reasonable to obfuscate when SGX and ARM TrustZone exists, if so why?
+*Why do we obfuscate code? Is it good? Is it bad? Is it reasonable to obfuscate when SGX and ARM TrustZone exists, if so why? What is control flow flattening? Where does it fit in? How is it implemented? What are known weaknesses/attacks? Possible improvements?* 
 
-What does this project focus on? How is it implemented? What are known weaknesses/attacks? Possible improvements?
+These are some of the underlying questions and thoughts this article aims to answer and discuss. As with many other things, there isn't a 100%-always-guaranteed-perfectly-correct-forever-and-ever answer. Obfuscation as a solution, however, is often frowned upon and it is hard to argue that it is implemented for the benefit of the consumer/end user. Instead, obfuscation is one of the tools business can use to protect their intellectual property (IP), and, depending on the implementation, may even result in a worse experience for the consumer/end user. While the specific reasonings why obfuscation is used are unknown to me, the general principle is clear: *to protect the product in a hostile environment*. 
+
+ > So what is this hostile environment, you ask? It is your phone, your computer, the wireless network in your home, the wonderful thing we call the internet. Generally, it is all the environments which the company does not fully control. One example are games running on your phone, console or computer. Big game publishers are using varying forms of digital rights management (DRM) software to protect their game (IP) against crackers and piracy. 
 
 Layout of this document.
 
@@ -123,6 +125,8 @@ The control flow graphs:
  - very poor cache performance by design (lots of branches)
  - depending on switch impl. and no. of cases it could consume a big chunk of the jump prediction table
  - almost guaranteed 100% branch mispredict in dispatcher (which also results in _very_ poor cache perf.)
+
+
  - algorithm used to flatten is easy to undo if known (write optimization/deobfuscate pass for each obfuscation step)
  - cannot _guarantee_ protection against dynamic analysis (branches, memory access) on its own
  - resulting graph is _obviously_ obfuscated and easy to identify --> code can be lifted/hoisted (depends on inlining/fusing)
