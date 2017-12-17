@@ -121,12 +121,11 @@ The control flow graphs:
  - obfuscation improves with other obfuscation techniques: inlining, substitution
 
 ## weaknesses
+ > An obvious weakness of control flow flattening is the performance penalty. 
 
  - very poor cache performance by design (lots of branches)
  - depending on switch impl. and no. of cases it could consume a big chunk of the jump prediction table
  - almost guaranteed 100% branch mispredict in dispatcher (which also results in _very_ poor cache perf.)
-
-
  - algorithm used to flatten is easy to undo if known (write optimization/deobfuscate pass for each obfuscation step)
  - cannot _guarantee_ protection against dynamic analysis (branches, memory access) on its own
  - resulting graph is _obviously_ obfuscated and easy to identify --> code can be lifted/hoisted (depends on inlining/fusing)
