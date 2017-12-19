@@ -121,7 +121,9 @@ The control flow graphs:
  - obfuscation improves with other obfuscation techniques: inlining, substitution
 
 ## weaknesses
- > An obvious weakness of control flow flattening is the performance penalty. 
+An obvious weakness of control flow flattening is the performance penalty. Most performance bottlenecks are caused by cache problems and the flattened control flow certainly doesn't help the cache to perform better. While many compilers try to optimize the branches of a switch construction the flattened graph is by design the worst possible case: a shitload of unique cases.
+
+Most compilers will optimize and generate a binary tree probe procedure, O(log N), for finding the correct case and this helps tremendously compared to standard linear probing, which is O(N). In fact it is a good guess that the compiler will generate a combination of the two.
 
  - very poor cache performance by design (lots of branches)
  - depending on switch impl. and no. of cases it could consume a big chunk of the jump prediction table
