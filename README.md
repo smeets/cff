@@ -121,7 +121,7 @@ The control flow graphs:
  - obfuscation improves with other obfuscation techniques: inlining, substitution
 
 ## weaknesses
-An obvious weakness of control flow flattening is the performance penalty. Most performance bottlenecks are caused by cache problems and the flattened control flow certainly doesn't help the cache to perform better. While many compilers try to optimize the branches of a switch construction the flattened graph is by design the worst possible case: a shitload of unique cases.
+An obvious weakness of control flow flattening is the **performance** penalty. Most performance bottlenecks are caused by **cache locality** problems and the flattened control flow certainly doesn't help the cache to perform better. While many compilers try to optimize the branches of a switch construction the flattened graph is by design the worst possible case: a shitload of unique cases.
 
 Most compilers will optimize and generate a binary tree probe procedure, O(log N), for finding the correct case and this helps tremendously compared to standard linear probing, which is O(N). In fact it is a good guess that the compiler will generate a combination of the two.
 
@@ -173,7 +173,7 @@ func Unflatten(function_blocks ir.BasicBlock[]) ir.Function {
 
 An interesting aspect of code obfuscation is how easily one, with a trained eye, can judge wether the assembly has been obfuscated or not. Some obfuscation techniques can be quite hard to identify, e.g. opaque predicates, dummy blocks and subsitution. Control flow flattening, however, is often very noticable as the resulting control flow graph has a distinguishable structure.
 
-This weakness leads to attacks such as *code lifting* whereby an attacker treats the obfuscated code as a black box. It is possible to modify the code that calls into the black box, as well as extracting it into their own program. Thus, control flow flattening shouldn't be used in order to obfuscate stateless functions, e.g. AES. One could argue that it is possible to introduce global state in the originally stateless (pure) functions and thereby protect against code lifting. This is certainly viable and is used, in the form of _opaque predicates_, to improve control flow flattening.
+This weakness leads to attacks such as **code lifting** whereby an attacker treats the obfuscated code as a black box. It is possible to modify the code that calls into the black box, as well as extracting it into their own program. Thus, control flow flattening shouldn't be used in order to obfuscate stateless functions, e.g. AES. One could argue that it is possible to introduce global state in the originally stateless (pure) functions and thereby protect against code lifting. This is certainly viable and is used, in the form of **opaque predicates**, to improve control flow flattening.
 
 ### using clang to optimize modules
 
@@ -191,7 +191,7 @@ This weakness leads to attacks such as *code lifting* whereby an attacker treats
  
 ### opaque predicates
 
-As discussed previously in the section regarding _code lifting_, this obfuscation method can be used to introduce (useless) state obfuscation which is hard to both identify and undo. Consider this example:
+As discussed previously in the section regarding **code lifting**, this obfuscation method can be used to introduce (useless) state obfuscation which is hard to both identify and undo. Consider this example:
 
 ```c
 if (true) {
