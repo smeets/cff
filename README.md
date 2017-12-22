@@ -6,7 +6,9 @@
 
 These are some of the underlying questions and thoughts this article aims to answer and discuss. As with many other things, there isn't a 100%-always-guaranteed-perfectly-correct-forever-and-ever answer. Obfuscation as a solution, however, is often frowned upon and it is hard to argue that it is implemented for the benefit of the consumer/end user. Instead, obfuscation is one of the tools business can use to protect their intellectual property (IP), and, depending on the implementation, may even result in a worse experience for the consumer/end user. While the specific reasonings why obfuscation is used are unknown to me, the general principle is clear: *to protect the product in a hostile environment*. 
 
- > So what is this hostile environment, you ask? It is your phone, your computer, the wireless network in your home, the wonderful thing we call the internet. Generally, it is all the environments which the company does not fully control. One example are games running on your phone, console or computer. Big game publishers are using varying forms of digital rights management (DRM) software to protect their game (IP) against crackers and piracy. 
+ > So what is this hostile environment, you ask? It is your phone, your computer, the wireless network in your home, the wonderful thing we call the internet, the servers that power your services. Generally, it is all the environments which the company does not fully control. One example are games running on your phone, console or computer. Big game publishers are using varying forms of digital rights management (DRM) software to protect their game (IP) against crackers and piracy. 
+ 
+To make some discussions easier and more informative these environments will be separated into *phone*, *pc* and *servers*. A short overview of protective measures and known attacks will be presented for each one of these environments. 
 
 Layout of this document.
 
@@ -27,11 +29,32 @@ Obfuscate control flow by replacing the function body with a state machine (moor
 
 ## obfuscation
 
-Security through obscurity?
+Obfuscation is often regarded as something dirty and subpar. While its reputation isn't necessarily undue it is important to recognise that obfuscation is a means to an end, whatever that is, with both extremely poor and good implementations.
+
+As with security, obfuscation is outrageously hard to get right and simple mistakes and oversights can be devastating. Once the product is shipped that's it; 
 
 Buying time?
 
 Track record of obfuscation techniques?
+
+### on your smartphone
+
+ - effect of Intel SGX, AMD ??, ARM TrustZone
+ - vendor-controlled system (apple fairplay, google ??, microsoft ??)
+ - exploitable --> rootable --> hostile
+ - give your program to apple & trust them
+
+### on your computer
+
+ - effect of Intel SGX, AMD ??, ARM TrustZone
+ - every man for himself
+ - 3rd party protection: Denuvo, VMProtect
+ - give your program to end user & trust them
+
+### on someone else's server
+
+ - effect of Intel SGX, AMD ??, ARM TrustZone
+ - give your program to server owner & trust them
 
 ## algorithm
 A flattening transform implementation could, in the spirit of go, look something like this:
@@ -106,6 +129,7 @@ func Magic(x: int) int
     }
 }
 ```
+The assembly of the flattened function is indeed more complicated and does more work compared to the original.
 
 ### example (graph)
 The control flow graphs:
@@ -121,13 +145,12 @@ The control flow graphs:
  - obfuscation improves with other obfuscation techniques: inlining, substitution
 
 ## weaknesses
-An obvious weakness of control flow flattening is the **performance** penalty. Most performance bottlenecks are caused by **cache locality** problems and the flattened control flow certainly doesn't help the cache to perform better. While many compilers try to optimize the branches of a switch construction the flattened graph is by design the worst possible case: a shitload of unique cases.
+An obvious weakness of control flow flattening is the **performance** penalty caused by **cache locality** and other memory-related problems. While many compilers try to optimize the branches of a switch construction the flattened graph is by design the worst possible case: a shitload of unique cases.
 
-Most compilers will optimize and generate a binary tree probe procedure, O(log N), for finding the correct case and this helps tremendously compared to standard linear probing, which is O(N). In fact it is a good guess that the compiler will generate a combination of the two.
+Most compilers will optimize and generate a binary tree comparison procedure, O(log N), for finding the correct case and this helps tremendously compared to standard linear probing, which is O(N). In fact most modern compilers will generate a combination of the two. This limits the penalty incurred by increasing the number of cases, which is required by some hardening techniques.
 
- - very poor cache performance by design (lots of branches)
- - depending on switch impl. and no. of cases it could consume a big chunk of the jump prediction table
- - almost guaranteed 100% branch mispredict in dispatcher (which also results in _very_ poor cache perf.)
+Each branch in the dispatcher takes up a slot in the branch predictor (of the CPU), which is guaranteed to be useless since the branch predictor _cannot_ predict the correct branch, unless we have a constant value obfuscated as an opaque predicate. Thus the generated branch will always have a mispredict overhead associated with it.
+
  - algorithm used to flatten is easy to undo if known (write optimization/deobfuscate pass for each obfuscation step)
  - cannot _guarantee_ protection against dynamic analysis (branches, memory access) on its own
  - resulting graph is _obviously_ obfuscated and easy to identify --> code can be lifted/hoisted (depends on inlining/fusing)
@@ -136,8 +159,9 @@ Most compilers will optimize and generate a binary tree probe procedure, O(log N
 
 ### symbolic execution
 
-???
+Execute the procedure symbolically and collect operations on _useful_ data.
 
+Data flow analysis can make this more effective.
 
 ### reverse engineering the obfuscation algorithm
 
@@ -181,6 +205,10 @@ This weakness leads to attacks such as **code lifting** whereby an attacker trea
 
 ## improving
 
+This section will try to describe improvements upon control flow flattening in a general sense and in relation to the toy implementation.
+
+The most important aspect of any obfuscation technique is to generate **non-deterministic** output. The program _result_ should very much still be deterministic but the generated code mustn't be, or you risk an attacker cracking _all_ your programs. A simple solution is to sprinkle some **randomness** whenever possible. Some candidates are *case ordering*, *block layout* and *successor computation*.
+
  - scramble case order
  - split (large) basic blocks
  - duplicate blocks
@@ -188,6 +216,10 @@ This weakness leads to attacks such as **code lifting** whereby an attacker trea
  - opaque predicates
  - dispatcher obfuscation
  - sub-level dispatchers
+ 
+### from the environment
+
+A smartphone paltform can improve on control flow obfuscation by recompiling/retransforming the application sent to each user, such that each user ends up with a somewhat different binary.
  
 ### opaque predicates
 
@@ -224,6 +256,8 @@ Some implementation methods use arithmetic (in)equalities to generate the predic
  - dispatcher tree depth
 
 ## summary
+
+In the end, (software) obfuscation is used simply because there isn't a better alternative available, yet.
 
 
 ## links
