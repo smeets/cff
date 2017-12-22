@@ -173,7 +173,7 @@ func Unflatten(function_blocks ir.BasicBlock[]) ir.Function {
 
 An interesting aspect of code obfuscation is how easily one, with a trained eye, can judge wether the assembly has been obfuscated or not. Some obfuscation techniques can be quite hard to identify, e.g. opaque predicates, dummy blocks and subsitution. Control flow flattening, however, is often very noticable as the resulting control flow graph has a distinguishable structure.
 
-This weakness leads to attacks such as *code lifting* whereby an attacker treats the obfuscated code as a black box. It is possible to modify the code that calls into the black box, as well as extracting it into their own program. Thus, control flow flattening shouldn't be used in order to obfuscate stateless functions, e.g. AES.
+This weakness leads to attacks such as *code lifting* whereby an attacker treats the obfuscated code as a black box. It is possible to modify the code that calls into the black box, as well as extracting it into their own program. Thus, control flow flattening shouldn't be used in order to obfuscate stateless functions, e.g. AES. One could argue that it is possible to introduce global state in the originally stateless (pure) functions and thereby protect against code lifting. This is certainly viable and is used, in the form of _opaque predicates_, to improve control flow flattening.
 
 ### using clang to optimize modules
 
@@ -188,6 +188,22 @@ This weakness leads to attacks such as *code lifting* whereby an attacker treats
  - opaque predicates
  - dispatcher obfuscation
  - sub-level dispatchers
+ 
+### opaque predicates
+
+As discussed previously in the section regarding _code lifting_, this obfuscation method can be used to introduce (useless) state obfuscation which is hard to both identify and undo. Consider this example:
+
+```c
+if (true) {
+    return 0;
+} else {         
+    return 1;
+}
+```
+
+The first branch will always be taken but a standard control flow graph doesn't show that. An analyser must first inspect the branch statement and try to simplify it before the control flow graph can be reduced. Opaque predicates try to make this analysis as difficult as possible.
+
+Some implementation methods use arithmetic (in)equalities to generate the predicate but these (in)equalities are difficult to construct and, once known, trivial to identify and simplify. From this problem ? to have the predicate masquerade as legit instructions. 
 
 ## tools
 
