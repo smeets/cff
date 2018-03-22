@@ -25,13 +25,19 @@ Layout of this document.
 
 ## idea
 
-Obfuscate control flow by replacing the function body with a state machine (moore) loop that dispatches the basic blocks. This dispatcher is _very_ often implemented as a switch in high-level code.
+Apply a flattening transform on the control flow that hides the original flow while keeping a strict equivalence in terms of input/output. These properties can be more described by:
+
+ - Machine *instructions* are grouped into logic units called *blocks*
+ - These *blocks* are chained together to form larger *procedures*
+ - A *program* consists of one or more *procedures*
+ - The control flow graph is a graph which describes all possible execution paths of a particular *program*, *procedure* or *block*
+ - The flattening transform joins a longer chain of nodes (a->b->c) together into one node with a lot of edges (a->b,a->c)
 
 ## obfuscation
 
 Obfuscation is often regarded as something dirty and subpar. While its reputation isn't necessarily undue it is important to recognise that obfuscation is a means to an end, whatever that is, with both extremely poor and good implementations.
 
-As with security, obfuscation is outrageously hard to get right and simple mistakes and oversights can be devastating. Once the product is shipped that's it; 
+As with security, obfuscation is outrageously hard to get right and simple mistakes and oversights can be devastating. Once the product is shipped, that's it.
 
 Buying time?
 
@@ -129,7 +135,7 @@ func Magic(x: int) int
     }
 }
 ```
-The assembly of the flattened function is indeed more complicated and does more work compared to the original.
+The assembly of the flattened function is indeed more complicated and does more work compared to the original. The function output, however, is equivalent to the original.
 
 ### example (graph)
 The control flow graphs:
