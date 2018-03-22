@@ -25,17 +25,20 @@ Layout of this document.
 
 ## idea
 
-Apply a flattening transform on the control flow that hides the original flow while keeping a strict equivalence in terms of input/output. These properties can be more described by:
+Apply a flattening transform on the control flow that hides the original flow while keeping a strict equivalence in terms of input/output. The core assumptions and observations can be expressed as:
 
- - Machine *instructions* are grouped into logic units called *blocks*
- - These *blocks* are chained together to form larger *procedures*
+ - The *source code* is compiled into *machine instructions* by the compiler
+ - Machine *instructions* can be grouped into *blocks* by jumps & entry points
+ - These *blocks* are chained together to form *procedures*
  - A *program* consists of one or more *procedures*
  - The control flow graph is a graph which describes all possible execution paths of a particular *program*, *procedure* or *block*
- - The flattening transform joins a longer chain of nodes (a->b->c) together into one node with a lot of edges (a->b,a->c)
+ - Static analysis of the control flow graph is constructed by finding branches (implicit & explicit) between *blocks*
+ - The *flattening transform* essentially combines a longer chain of branches (a->b->c->d) into a looping state machine (a->{b,c,d}), keeping the original order but preventing static analysis from discovering it by computing the next block during program execution
+ - It is *allowed* to do anything imaginable as long as the input/output equivalence holds, e.g. the state machine can be arbitrarily complex
 
 ## obfuscation
 
-Obfuscation is often regarded as something dirty and subpar. While its reputation isn't necessarily undue it is important to recognise that obfuscation is a means to an end, whatever that is, with both extremely poor and good implementations.
+Obfuscation is often regarded as a subpar solution to a difficult problem. While its reputation isn't necessarily undue it is important to recognise that obfuscation is a means to an end, whatever that is, with both extremely poor and good implementations.
 
 As with security, obfuscation is outrageously hard to get right and simple mistakes and oversights can be devastating. Once the product is shipped, that's it.
 
@@ -153,7 +156,7 @@ The control flow graphs:
 ## weaknesses
 An obvious weakness of control flow flattening is the **performance** penalty caused by **cache locality** and other memory-related problems. While many compilers try to optimize the branches of a switch construction the flattened graph is by design the worst possible case: a shitload of unique cases.
 
-Most compilers will optimize and generate a binary tree comparison procedure, O(log N), for finding the correct case and this helps tremendously compared to standard linear probing, which is O(N). In fact most modern compilers will generate a combination of the two. This limits the penalty incurred by increasing the number of cases, which is required by some hardening techniques.
+Most compilers will optimize and generate a binary tree comparison procedure, with O(log N) complexity, for finding the correct case and this helps tremendously compared to standard linear probing, which is O(N). In fact most modern compilers will generate a combination of the two. This limits the penalty incurred by increasing the number of cases, which is required by some hardening techniques.
 
 Each branch in the dispatcher takes up a slot in the branch predictor (of the CPU), which is guaranteed to be useless since the branch predictor _cannot_ predict the correct branch, unless we have a constant value obfuscated as an opaque predicate. Thus the generated branch will always have a mispredict overhead associated with it.
 
