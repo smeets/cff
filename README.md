@@ -44,7 +44,8 @@ As with security, obfuscation is outrageously hard to get right and simple mista
 
 Track record of obfuscation techniques?
 
-### on your smartphone
+### on your devices
+(smartphone, console)
 
  - effect of Intel SGX, AMD ??, ARM TrustZone
  - vendor-controlled system (apple fairplay, google ??, microsoft ??)
