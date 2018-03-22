@@ -38,11 +38,9 @@ Apply a flattening transform on the control flow that hides the original flow wh
 
 ## obfuscation
 
-Obfuscation is often regarded as a subpar solution to a difficult problem. While its reputation isn't necessarily undue it is important to recognise that obfuscation is a means to an end, whatever that is, with both extremely poor and good implementations.
+Obfuscation is often regarded as a subpar solution to a difficult problem. While its reputation isn't necessarily undue it is important to recognise that obfuscation is a means to an end, whatever that is, with both poor and solid implementations.
 
-As with security, obfuscation is outrageously hard to get right and simple mistakes and oversights can be devastating. Once the product is shipped, that's it.
-
-Buying time?
+As with security, obfuscation is outrageously hard to get right and simple mistakes and oversights can be devastating. Once the product is shipped, that's it - it's out there for the world to see and (ab)use.
 
 Track record of obfuscation techniques?
 
