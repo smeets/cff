@@ -12,7 +12,7 @@ A->B->C->D --> switch + loop rewrite --> X->{A,B,C,D}->X
 
 Compare the two following graphs
 
-![original cfg](../bin/intro/abcd.svg)
+![original cfg](../../bin/intro/abcd.svg)
 
 the cfg of (1) is given by the definition itself, while the cfg of (2) cannot be identified without inspecting the switch machine itself, i.e. how `X` selects the next block. This is the core obfuscation property (obfuscation relies on switch variable) and must therefore be as protected as it can.
 
