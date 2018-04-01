@@ -1,6 +1,6 @@
-[<~ previous](../cff) -- [next ~>](../attacking)
+[cff](../cff) -- [analysis](../analysis) -- [attacking](../attacking) -- [attacking](../improving) -- [attacking](../tooling)
 
-# 4 - analysis
+# analysis
 
 ## strengths
 

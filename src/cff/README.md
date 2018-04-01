@@ -1,4 +1,4 @@
-[<~ previous](../) -- [next ~>](../analysis)
+[cff](../cff) -- [analysis](../analysis) -- [attacking](../attacking) -- [attacking](../improving) -- [attacking](../tooling)
 
 # control flow flattening
 

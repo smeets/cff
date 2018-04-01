@@ -1,6 +1,6 @@
-[<~ previous](../analysis) -- [next ~>](../improving)
+[cff](../cff) -- [analysis](../analysis) -- [attacking](../attacking) -- [attacking](../improving) -- [attacking](../tooling)
 
-# 5 - attacks
+# attacks
 
 ## symbolic execution
 

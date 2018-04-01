@@ -1,6 +1,6 @@
-[<~ previous](../improving) -- [next ~>](https://github.com/smeets/cff#summary)
+[cff](../cff) -- [analysis](../analysis) -- [attacking](../attacking) -- [attacking](../improving) -- [attacking](../tooling)
 
-# 7 - tools
+# tools
 
 ## [OLLVM](https://github.com/obfuscator-llvm/obfuscator/)
 

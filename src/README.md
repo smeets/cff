@@ -1,5 +1,4 @@
-
-[<~ previous](https://github.com/smeets/cff) -- [next ~>](cff)
+[cff](../cff) -- [analysis](../analysis) -- [attacking](../attacking) -- [attacking](../improving) -- [attacking](../tooling)
 
 # control flow flattening
 

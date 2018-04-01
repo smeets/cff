@@ -1,6 +1,6 @@
-[<~ previous](../attacking) -- [next ~>](../tooling)
+[cff](../cff) -- [analysis](../analysis) -- [attacking](../attacking) -- [attacking](../improving) -- [attacking](../tooling)
 
-# 6 - improving
+# improving
 
 This section will try to describe improvements upon control flow flattening in a general sense and in relation to the toy implementation.
 
