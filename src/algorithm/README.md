@@ -1,4 +1,4 @@
-[<~ previous](../obfuscation) -- [next ~>](../analysis)
+[<~ previous](../cff) -- [next ~>](../analysis)
 
 # 3 - implementation
 

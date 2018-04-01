@@ -1,5 +1,5 @@
 
-[<~ previous](https://github.com/smeets/cff) -- [next ~>](obfuscation)
+[<~ previous](https://github.com/smeets/cff) -- [next ~>](cff)
 
 # control flow flattening
 
@@ -13,65 +13,48 @@ These are some of the underlying questions and thoughts this article aims to ans
 
 To make some discussions easier and more informative these environments will be separated into *phone*, *pc* and *servers*. A short overview of protective measures and known attacks will be presented for each one of these environments.
 
-## 1 - introduction
+## a brief introduction to obfuscation
 
-Control flow flattening is an obfuscation technique which aims to prevent identification of the control flow by means of static analysis. The obfuscation is based on two components: a *looped switch structure* and a *flattening transformation*. Basically, the flattening transformation rewrites the original control flow by introducing a looped switch to branch between (previously) connected basic blocks:
+Obfuscation is often regarded as a subpar solution to a difficult problem. While its reputation isn't necessarily undue it is important to recognise that obfuscation is a means to an end, whatever that is, with both poor and solid implementations.
 
-```
-program_in -->       CFF magic       --> program_out
+As with security, obfuscation is outrageously hard to get right and simple mistakes and oversights can be devastating. Once the product is shipped, that's it - it's out there for the world to see and (ab)use.
 
-A->B->C->D --> switch + loop rewrite --> X->{A,B,C,D}->X
-```
+Track record of obfuscation techniques?
 
-Compare the two following graphs
+### on your devices
+(smartphone, console)
 
-![original cfg](../bin/intro/abcd.svg)
+ - effect of Intel SGX, AMD ??, ARM TrustZone
+ - vendor-controlled system (apple fairplay, google ??, microsoft ??)
+ - exploitable --> rootable --> hostile
+ - give your program to apple & trust them
 
-the cfg of (1) is given by the definition itself, while the cfg of (2) cannot be identified without inspecting the switch machine itself, i.e. how `X` selects the next block. This is the core obfuscation property (obfuscation relies on switch variable) and must therefore be as protected as it can.
+### on your computer
 
-But before we head on we should start with a few definitions and observations:
+ - effect of Intel SGX, AMD ??, ARM TrustZone
+ - every man for himself
+ - 3rd party protection: Denuvo, VMProtect
+ - give your program to end user & trust them
 
-> (O1) Source code is compiled into logical **basic blocks**: units of code defined by the original programming language constructions (if, while, { }, for, etc..)
+### on someone else's server
 
-> (O2) The **control flow graph** describes all the possible execution paths of a procedure or program: one can view the graph nodes as *basic blocks* and graph edges as branches between the blocks (jumps, calls).
+ - effect of Intel SGX, AMD ??, ARM TrustZone
+ - give your program to server owner & trust them
 
-> (O3) **Static analysis** of a program binary tries to identify *basic blocks* and the edges between them and so uncover the *control flow graph*. This is not a trivial since the *basic block* is only a compiler/assembler concept and not present in the assembled binary. It is simpler to identify *basic blocks* by their branches than by their content, i.e. mark entry & exit points in the memory and use them to group instructions into blocks.
+Next up:
 
-> (O4) **Control flow flattening** transforms a function *f* into *F*, with respect to some constraints:
+ - section 1: [control flow flattening](cff)
+ - section 2: [algorithm](algorithm)
+ - section 3: [analysis](analysis)
+ - section 4: [attacking cff](attacking)
+ - section 5: [improving cff](improving)
+ - section 6: [available tools](tooling)
 
-> - same input, same output: *f(x) = F(x)*
-> - stable ordering: *F* contains basic blocks of *f* in original order and executes them in the original order
-
-
-From (O3) we see that branches convey useful of information about the control flow. So if we can hide the target address of a branch instruction then the analyser can only create an exit point (and not a corresponding entry point somewhere else).
-
- of the control flow graph is done by identifying edges (branches) between these *basic blocks*.
-
-The flattening transform must
- - The *source code* is compiled into *machine instructions* by the compiler
- - Machine *instructions* can be grouped into *blocks* by jumps & entry points
- - These *blocks* are chained together to form *procedures*
- - A *program* consists of one or more *procedures*
- - The control flow graph is a graph which describes all possible execution paths of a particular *program*, *procedure* or *block*
- - Static analysis of the control flow graph is constructed by finding branches (implicit & explicit) between *blocks*
- - The *flattening transform* essentially combines a longer chain of branches (a->b->c->d) into a looping state machine (a->{b,c,d}), keeping the original order but preventing static analysis from discovering it by computing the next block during program execution
- - It is *allowed* to do anything imaginable as long as the input/output equivalence holds, e.g. the state machine can be arbitrarily complex
-
-
-Layout of this document.
-
- - section 2: [an intro to obfuscation](obfuscation)
- - section 3: [algorithm](algorithm)
- - section 4: [analysis](analysis)
- - section 6: [attacking cff](attacking)
- - section 7: [improving cff](improving)
- - section 8: [available tools](tooling)
-
-## 10 - summary
+## summary
 
 In the end, (software) obfuscation is used simply because there isn't a better alternative available, yet.
 
 
-## 11 - links
+## links
 
  - [Obfuscating C++ programs via control flow flattening, T László and A Kiss, 2009](http://ac.inf.elte.hu/Vol_030_2009/003.pdf)
