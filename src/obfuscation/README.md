@@ -1,5 +1,4 @@
-[<~ previous](../)
-[next ~>](../algorithm)
+[<~ previous](../) -- [next ~>](../algorithm)
 
 # 2 - obfuscation
 

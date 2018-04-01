@@ -1,0 +1,37 @@
+digraph Z{
+	node [shape=box,width=0.4,height=0.1];
+
+	subgraph cluster0 {
+		rankdir="LR";
+		label="(F1) original cfg: A->B->C->D";
+		pencolor=transparent;
+
+		oA [ label = "A" ];
+		oB [ label = "B" ];
+		oC [ label = "C" ];
+		oD [ label = "D" ];
+
+		oA -> oB;
+		oB -> oC;
+		oC -> oD;
+	}
+
+	subgraph cluster1 {
+		label="(F2) flattened cfg: X->{A,B,C,D}->X";
+		pencolor=transparent;
+
+		X;
+		{
+			rank = same;
+			A; B; C; D;
+		}
+		Y;
+
+		X -> A -> Y;
+		X -> B -> Y;
+		X -> C -> Y;
+		X -> D -> Y;
+		Y -> X;
+	}
+
+}

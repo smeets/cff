@@ -1,15 +1,14 @@
-[<~ previous](../analysis)
-[next ~>](../improving)
+[<~ previous](../analysis) -- [next ~>](../improving)
 
 # 5 - attacks
 
-### symbolic execution
+## symbolic execution
 
 Execute the procedure symbolically and collect operations on _useful_ data.
 
 Data flow analysis can make this more effective.
 
-### reverse engineering the obfuscation algorithm
+## reverse engineering the obfuscation algorithm
 
 extremely simplified example on how to reverse the algorithm:
 ```go
@@ -39,12 +38,12 @@ func Unflatten(function_blocks ir.BasicBlock[]) ir.Function {
 }
 ```
 
-### identifying flattened code
+## identifying flattened code
 
 An interesting aspect of code obfuscation is how easily one, with a trained eye, can judge wether the assembly has been obfuscated or not. Some obfuscation techniques can be quite hard to identify, e.g. opaque predicates, dummy blocks and subsitution. Control flow flattening, however, is often very noticable as the resulting control flow graph has a distinguishable structure.
 
 This weakness leads to attacks such as **code lifting** whereby an attacker treats the obfuscated code as a black box. It is possible to modify the code that calls into the black box, as well as extracting it into their own program. Thus, control flow flattening shouldn't be used in order to obfuscate stateless functions, e.g. AES. One could argue that it is possible to introduce global state in the originally stateless (pure) functions and thereby protect against code lifting. This is certainly viable and is used, in the form of **opaque predicates**, to improve control flow flattening.
 
-### using clang to optimize modules
+## using clang to optimize modules
 
  - piggyback on the compiler:  loop `asm to ir -> recompile w/optimization -> asm to ir`

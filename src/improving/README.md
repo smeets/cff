@@ -1,7 +1,6 @@
-[<~ previous](../attacking)
-[next ~>](../tooling)
+[<~ previous](../attacking) -- [next ~>](../tooling)
 
-## 6 - improving
+# 6 - improving
 
 This section will try to describe improvements upon control flow flattening in a general sense and in relation to the toy implementation.
 
@@ -15,11 +14,11 @@ The most important aspect of any obfuscation technique is to generate **non-dete
  - dispatcher obfuscation
  - sub-level dispatchers
 
-### from the environment
+## from the environment
 
 A smartphone paltform can improve on control flow obfuscation by recompiling/retransforming the application sent to each user, such that each user ends up with a somewhat different binary.
 
-### opaque predicates
+## opaque predicates
 
 As discussed previously in the section regarding **code lifting**, this obfuscation method can be used to introduce (useless) state obfuscation which is hard to both identify and undo. Consider this example:
 

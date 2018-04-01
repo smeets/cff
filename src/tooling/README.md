@@ -1,11 +1,8 @@
-[<~ previous](../improving)
-[next ~>](https://github.com/smeets/cff#summary)
+[<~ previous](../improving) -- [next ~>](https://github.com/smeets/cff#summary)
 
-## 7 - tools
+# 7 - tools
 
-### [OLLVM](https://github.com/obfuscator-llvm/obfuscator/)
-
-## results
+## [OLLVM](https://github.com/obfuscator-llvm/obfuscator/)
 
 ### benchmarks
 

@@ -1,0 +1,17 @@
+digraph A {
+	label="(2) flattened cfg: X->{A,B,C,D}->X";
+	node [shape=box,width=0.4,height=0.1];
+
+	X;
+	{
+		rank = same;
+		A; B; C; D;
+	}
+	Y;
+
+	X -> A -> Y;
+	X -> B -> Y;
+	X -> C -> Y;
+	X -> D -> Y;
+	Y -> X;
+}

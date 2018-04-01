@@ -1,5 +1,4 @@
-[<~ previous](../algorithm)
-[next ~>](../attacking)
+[<~ previous](../algorithm) -- [next ~>](../attacking)
 
 # 4 - analysis
 
