@@ -1,5 +1,5 @@
 [<~ previous](../improving)
-[next ~>](https://smeets/cff#summary)
+[next ~>](https://github.com/smeets/cff#summary)
 
 ## 7 - tools
 
