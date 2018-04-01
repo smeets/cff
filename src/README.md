@@ -1,3 +1,7 @@
+
+[< previous](https://github.com/smeets/cff)
+[> next](obfuscation)
+
 # 1 - introduction
 
 Apply a flattening transform on the control flow that hides the original flow while keeping a strict equivalence in terms of input/output. The core assumptions and observations can be expressed as:
