@@ -14,7 +14,7 @@ Compare the two following graphs
 
 ![original cfg](../../bin/intro/abcd.svg)
 
-the cfg of (1) is given by the definition itself, while the cfg of (2) cannot be identified without inspecting the switch machine itself, i.e. how `X` selects the next block. This is the core obfuscation property (obfuscation relies on switch variable) and must therefore be as protected as it can.
+the cfg of (1) is given by the definition itself, while the cfg of (2) cannot be identified without inspecting the switch machine itself, i.e. how `X` selects the next block. This is the core obfuscation property (obfuscation relies on switch variable) and must therefore be as protected as best as possible.
 
 But before we head on we should start with a few definitions and observations:
 
@@ -35,3 +35,10 @@ But before we head on we should start with a few definitions and observations:
 (O2) Based on (O1) branches convey useful of information about the control flow. So if it is possible to hide the target address of a branch instruction then the analyser can only create an exit point (and not a corresponding entry point somewhere else).
 
 (O3) Since (D3) doesn't prohibit additional CFG nodes it is possible to introduce new blocks into the control flow graph that aren't present in the original. This is essentially what happends when the loop and switch machine is constructed: `loop_start` → `switch(X)` → `{A,B,C,D}` → `loop_end` → `loop_start`.
+
+## previous work
+
+Here are some interesting links:
+
+ - wobba dubba made a great contribution and has been awarded +10 pts
+ - long-kalsong-gong-gong wrote a good blog post about reversing +33 ptas
