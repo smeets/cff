@@ -1,0 +1,8 @@
+digraph G {
+  node [ shape = box ]
+  " %1 = alloca i32, align 4\l%2 = alloca i32, align 4\l%3 = alloca i8**, align 8\lstore i32 0, i32* %1\lstore i32 %argc, i32* %2, align 4\lstore i8** %argv, i8*** %3, align 8\l%4 = load i32* %2, align 4\l%5 = icmp eq i32 %4, 0\lbr i1 %5, label %6, label %7\l" -> "store i32 0, i32* %1\lbr label %8\l"
+  " %1 = alloca i32, align 4\l%2 = alloca i32, align 4\l%3 = alloca i8**, align 8\lstore i32 0, i32* %1\lstore i32 %argc, i32* %2, align 4\lstore i8** %argv, i8*** %3, align 8\l%4 = load i32* %2, align 4\l%5 = icmp eq i32 %4, 0\lbr i1 %5, label %6, label %7\l" -> "store i32 1, i32* %1\lbr label %8\l"
+  "store i32 0, i32* %1\lbr label %8\l" -> " %9 = load i32* %1\lret i32 %9\l"
+  "store i32 1, i32* %1\lbr label %8\l" -> " %9 = load i32* %1\lret i32 %9\l"
+}
+

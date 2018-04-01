@@ -1,0 +1,38 @@
+digraph JumpTable {
+    compound = true;
+    node [
+        shape = "record"
+        fontname="monospace"
+        fontsize=10
+    ]
+    Steer2 [ label = "{steer}" ]
+    While [ label = "{while(true)}" ]
+    Switch [ label = "{switch(b)}" ]
+    CheckForward [ label = "{if (w==1)}"]
+    SetForward [ label = "{b = 1;}"]
+    SetPhysics [ label = "{b = 2;}"]
+    Forward [ label = "{moveForward();\lb = 2;\l}" ]
+    Physics [ label = "{updatePhysics();\lb = 3;\l}"]
+    Return [ label = "return;" ]
+    WhileEnd [ label = "{}" ]
+
+    {rank=same; CheckForward; Forward; Physics; Return}
+    {rank=same; SetForward; SetPhysics; }
+
+    Steer2->While->Switch
+
+    Switch->CheckForward [label="0"]
+    Switch->Forward [label="1"]
+    Switch->Physics[label="2"]
+    Switch->Return [label="3"]
+
+    CheckForward->SetForward [label="T"]
+    CheckForward->SetPhysics [label="F"]
+
+    Forward->WhileEnd
+    Physics->WhileEnd
+    SetForward->WhileEnd
+    SetPhysics->WhileEnd
+
+    WhileEnd->While
+}
