@@ -1,4 +1,4 @@
-[<~ previous](../algorithm) -- [next ~>](../attacking)
+[<~ previous](../cff) -- [next ~>](../attacking)
 
 # 4 - analysis
 
