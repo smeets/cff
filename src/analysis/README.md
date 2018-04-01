@@ -1,3 +1,6 @@
+[<~ previous](../algorithm)
+[next ~>](../attacking)
+
 # 4 - analysis
 
 ## strengths

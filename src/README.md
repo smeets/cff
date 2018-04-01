@@ -1,6 +1,6 @@
 
-[< previous](https://github.com/smeets/cff)
-[> next](obfuscation)
+[<~ previous](https://github.com/smeets/cff)
+[next ~>](obfuscation)
 
 # 1 - introduction
 

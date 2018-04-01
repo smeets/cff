@@ -1,4 +1,7 @@
-# cff implementation
+[<~ previous](../obfuscation)
+[next ~>](../analysis)
+
+# 3 - implementation
 
 A flattening transform implementation could, in the spirit of go, look something like this:
 ```go

@@ -1,4 +1,7 @@
-## tools
+[<~ previous](../improving)
+[next ~>](https://smeets/cff#summary)
+
+## 7 - tools
 
 ### [OLLVM](https://github.com/obfuscator-llvm/obfuscator/)
 

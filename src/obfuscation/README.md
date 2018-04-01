@@ -1,4 +1,7 @@
-# obfuscation
+[<~ previous](../)
+[next ~>](../algorithm)
+
+# 2 - obfuscation
 
 Obfuscation is often regarded as a subpar solution to a difficult problem. While its reputation isn't necessarily undue it is important to recognise that obfuscation is a means to an end, whatever that is, with both poor and solid implementations.
 
